@@ -1,0 +1,1 @@
+This repository holds PoCs and short reports for vulnerabilities and bugs I have found in various software, I often update the README.md for each of the findings with a link to a blog post containing root cause analysis and/or exploitation process.

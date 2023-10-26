@@ -3,6 +3,107 @@ CVE-2023-46587
 Description
 A vulnerability has been identified in XnView 2.51.5, that allows user Mode Write AV starting at xnview+0x000000000035d52d and potential code execution.
 
+Bug
+(16c8.1268): Access violation - code c0000005 (first chance)
+First chance exceptions are reported before any exception handling.
+This exception may be expected and handled.
+eax=00000008 ebx=00000020 ecx=0c9cd9d8 edx=0031c0d8 esi=00000474 edi=0031c500
+eip=0165d52d esp=0031c004 ebp=0031c008 iopl=0         nv up ei pl nz na po nc
+cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00010202
+*** ERROR: Module load completed but symbols could not be loaded for xnview.exe
+xnview+0x35d52d:
+0165d52d 894120          mov     dword ptr [ecx+20h],eax ds:0023:0c9cd9f8=????????
+0:000> k
+ChildEBP RetAddr  
+WARNING: Stack unwind information not available. Following frames may be wrong.
+0031c008 0162e7e9 xnview+0x35d52d
+0031c35c 0162d410 xnview+0x32e7e9
+0031c5f4 0162cba0 xnview+0x32d410
+0031c608 0155da0e xnview+0x32cba0
+0031c624 0155d8a2 xnview+0x25da0e
+0031c74c 01561bb5 xnview+0x25d8a2
+0031c780 0156199c xnview+0x261bb5
+0031c7a8 0143bbcd xnview+0x26199c
+0031c908 0143be06 xnview+0x13bbcd
+0031cec0 0143c44f xnview+0x13be06
+0031d000 75b5c4e7 xnview+0x13c44f
+0031d02c 75b75b7c USER32!InternalCallWinProc+0x23
+0031d0a8 75b759f3 USER32!UserCallDlgProcCheckWow+0x132
+0031d0f0 75b67206 USER32!DefDlgProcWorker+0xa8
+0031d10c 75b5c4e7 USER32!DefDlgProcA+0x22
+0031d138 75b5c5e7 USER32!InternalCallWinProc+0x23
+0031d1b0 75b55294 USER32!UserCallWinProcCheckWow+0x14b
+0031d1f0 75b55582 USER32!SendMessageWorker+0x4d0
+0031d210 7480bdb2 USER32!SendMessageW+0x7c
+0031d2ac 7480be02 COMCTL32!CCSendNotify+0x7b8
+0031d2e8 76cb7bdc COMCTL32!SendNotify+0x36
+0031d440 76cb9b7e COMDLG32!SendOFNotify+0x7c
+0031d468 76c8e35e COMDLG32!CLegacyEvents::OnSelectionChange+0x38
+0031d478 7479e550 COMDLG32!CFileOpenSave::_NotifySelectionChangeCallback+0x15
+0031d490 76c8e33c COMCTL32!DPA_EnumCallback+0x25
+0031d4a4 76c8e44c COMDLG32!CFileOpenSave::_NotifySelectionChange+0x25
+0031d70c 75b5c4e7 COMDLG32!CFileOpenSave::s_OpenSaveDlgProc+0x7a1
+0031d738 75b75b7c USER32!InternalCallWinProc+0x23
+0031d7b4 75b759f3 USER32!UserCallDlgProcCheckWow+0x132
+0031d7fc 75b75be3 USER32!DefDlgProcWorker+0xa8
+0031d818 75b5c4e7 USER32!DefDlgProcW+0x22
+0031d844 75b5c5e7 USER32!InternalCallWinProc+0x23
+0031d8bc 75b5cc19 USER32!UserCallWinProcCheckWow+0x14b
+0031d91c 75b5cc70 USER32!DispatchMessageWorker+0x35e
+0031d92c 74811f74 USER32!DispatchMessageW+0xf
+0031d978 74812ecd COMCTL32!CheckForDragBeginEx+0xda
+0031da30 7481307f COMCTL32!CLVMouseManager::HandleMouse+0x721
+0031da4c 748120e7 COMCTL32!CLVMouseManager::OnButtonDown+0x18
+0031dbcc 7479fe80 COMCTL32!CListView::WndProc+0x94a
+0031dbf4 75b5c4e7 COMCTL32!CListView::s_WndProc+0x4e8
+0031dc20 75b5c5e7 USER32!InternalCallWinProc+0x23
+0031dc98 75b51b31 USER32!UserCallWinProcCheckWow+0x14b
+0031dcc8 75b51b57 USER32!CallWindowProcAorW+0x99
+0031dce8 7479f453 USER32!CallWindowProcW+0x1b
+0031dd04 7479f5fe COMCTL32!CallOriginalWndProc+0x1a
+0031dd68 7479f5b2 COMCTL32!CallNextSubclassProc+0x3d
+0031dd8c 76098180 COMCTL32!DefSubclassProc+0x46
+0031ddec 7479f5fe SHELL32!CListViewHost::s_ListViewSubclassWndProc+0x213
+0031de50 7479f4a0 COMCTL32!CallNextSubclassProc+0x3d
+0031deb0 75b5c4e7 COMCTL32!MasterSubclassProc+0x54
+0031dedc 75b5c5e7 USER32!InternalCallWinProc+0x23
+0031df54 75b5cc19 USER32!UserCallWinProcCheckWow+0x14b
+0031dfb4 75b5cc70 USER32!DispatchMessageWorker+0x35e
+0031dfc4 75b541eb USER32!DispatchMessageW+0xf
+0031dfe8 75b738c1 USER32!IsDialogMessageW+0x588
+0031e024 75b73b27 USER32!DialogBox2+0x144
+0031e048 75b73b76 USER32!InternalDialogBox+0xcb
+0031e068 75b73b9a USER32!DialogBoxIndirectParamAorW+0x37
+0031e088 76c7597b USER32!DialogBoxIndirectParamW+0x1b
+0031e0d4 76cb1b50 COMDLG32!CFileOpenSave::Show+0x181
+0031e100 76cb29d0 COMDLG32!_InvokeNewFileOpenSave+0xab
+0031e12c 76cb2b15 COMDLG32!_CreateNewFileOpenSaveInProc+0xae
+0031e168 76cb2b71 COMDLG32!NewGetFileName+0x121
+0031e178 76ca9a9b COMDLG32!NewGetOpenFileName+0xf
+0031e1a4 76caa1cf COMDLG32!GetFileName+0xcd
+0031f27c 76caa2cc COMDLG32!GenericGetFileNameA+0x49d
+0031f28c 0143ce98 COMDLG32!GetOpenFileNameA+0x23
+0031f418 014ab7e7 xnview+0x13ce98
+0031f55c 01434c93 xnview+0x1ab7e7
+0031f588 014af556 xnview+0x134c93
+0031f5a4 01434ba3 xnview+0x1af556
+0031f5cc 014af619 xnview+0x134ba3
+0031f5e0 75b5c4e7 xnview+0x1af619
+0031f60c 75b5c5e7 USER32!InternalCallWinProc+0x23
+0031f684 75b5cc19 USER32!UserCallWinProcCheckWow+0x14b
+0031f6e4 75b52e41 USER32!DispatchMessageWorker+0x35e
+0031f6f4 014b2f77 USER32!DispatchMessageA+0xf
+0031f898 016b7240 xnview+0x1b2f77
+0031f8e4 771fef6c xnview+0x3b7240
+0031f8f0 777e3618 kernel32!BaseThreadInitThunk+0xe
+0031f930 777e35eb ntdll!__RtlUserThreadStart+0x70
+0031f948 00000000 ntdll!_RtlUserThreadStart+0x1b
+0:000> !msec.exploitable
+
+!exploitable 1.6.0.0
+Exploitability Classification: EXPLOITABLE
+Recommended Bug Title: Exploitable - User Mode Write AV starting at xnview+0x000000000035d52d (Hash=0xb0048d34.0x47d42aa3)
+
 References
-[https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46587)
-[https://cert-portal.siemens.com/productcert/pdf/ssa-553086.pdf](https://download.xnview.com/XnView-win.zip)https://download.xnview.com/XnView-win.zip
+* [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46587](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46587)
+* [https://cert-portal.siemens.com/productcert/pdf/ssa-553086.pdf](https://download.xnview.com/XnView-win.zip)https://download.xnview.com/XnView-win.zip
